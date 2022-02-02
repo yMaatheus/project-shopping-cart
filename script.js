@@ -52,7 +52,7 @@ async function addItemToCartItem(id) {
   card.appendChild(createCartItemElement(item));
 }
 
-function addItemToCardListener(event) {
+function addItemToCartListener(event) {
   const { target } = event;
   if (target.classList.contains('item__add')) {
     const id = target.parentElement.firstElementChild.innerText;
@@ -63,5 +63,5 @@ function addItemToCardListener(event) {
 window.onload = () => {
   loadProducts();
   const buttonAddToCard = document.querySelector('.items');
-  buttonAddToCard.addEventListener('click', addItemToCardListener);
+  buttonAddToCard.addEventListener('click', addItemToCartListener);
 };
