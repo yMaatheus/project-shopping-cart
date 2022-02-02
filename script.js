@@ -32,7 +32,7 @@ function cartItemClickListener(event) {
   // coloque seu código aqui
 }
 
-function createCartItemElement({ sku, name, salePrice }) {
+function createCartItemElement({ id: sku, title: name, price: salePrice }) {
   const li = document.createElement('li');
   li.className = 'cart__item';
   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
@@ -46,6 +46,22 @@ async function loadProducts() {
   products.forEach((product) => items.appendChild(createProductItemElement(product)));
 }
 
+async function addItemToCartItem(id) {
+  const item = await fetchItem(id);
+  const card = document.querySelector('.cart__items');
+  card.appendChild(createCartItemElement(item));
+}
+
+function addItemToCardListener(event) {
+  const { target } = event;
+  if (target.classList.contains('item__add')) {
+    const id = target.parentElement.firstElementChild.innerText;
+    addItemToCartItem(id);
+  }
+}
+
 window.onload = () => {
   loadProducts();
+  const buttonAddToCard = document.querySelector('.items');
+  buttonAddToCard.addEventListener('click', addItemToCardListener);
 };
