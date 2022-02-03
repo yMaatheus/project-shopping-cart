@@ -64,8 +64,8 @@ function addItemToCartListener(event) {
   }
 }
 
-function loadCartItems() {
-  getSavedCartItems().forEach((id) => addItemToCartItem(id));
+async function loadCartItems() {
+  await getSavedCartItems().forEach((id) => addItemToCartItem(id));
 }
 
 window.onload = () => {
