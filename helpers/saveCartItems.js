@@ -1,9 +1,7 @@
-const saveCartItems = (id) => {
-  let array = [id];
-  if (localStorage.getItem('cartItems') != null) {
-    array = JSON.parse(localStorage.getItem('cartItems')).concat(array);
-  }
-  localStorage.setItem('cartItems', JSON.stringify(array));
+const saveCartItems = () => {
+  const cartItemsList = Array
+    .from(document.querySelector('.cart__items').children).map((element) => element.id);
+  localStorage.setItem('cartItems', JSON.stringify(cartItemsList));
 };
 
 if (typeof module !== 'undefined') {
