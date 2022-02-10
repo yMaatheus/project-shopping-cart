@@ -115,7 +115,7 @@ function hideLoading() {
 
 async function loadProducts() {
   const items = document.querySelector('.items');
-  const products = await fetchProducts();
+  const products = await fetchProducts('computador');
   hideLoading();
   products.forEach((product) => items.appendChild(createProductItemElement(product)));
 }
