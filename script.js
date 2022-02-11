@@ -54,7 +54,7 @@ function cartItemClickListener(event) {
   const { target } = event;
   if (target.classList.contains('cart__item')) {
     target.remove();
-    saveCartItems();
+    saveCartItems(cartItems);
     const price = Number(target.innerText.split('$')[1]);
     updatePrice('sub', price);
   }
@@ -73,7 +73,7 @@ async function addItemToCartItem(id, callback) {
   const item = await fetchItem(id);
   cartItems.appendChild(createCartItemElement(item));
   if (typeof callback === 'function') {
-    callback();
+    callback(cartItems);
   }
 }
 
