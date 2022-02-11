@@ -32,6 +32,11 @@ function getSkuFromProductItem(item) {
   return item.querySelector('span.item__sku').innerText;
 }
 
+function saveCart() {
+  const cartItemsList = Array.from(cartItems.children).map((element) => element.id);
+  saveCartItems(cartItemsList);
+}
+
 function resetPrice() {
   sum = 0;
   document.querySelector('.total-price').innerHTML = '0';
@@ -54,7 +59,7 @@ function cartItemClickListener(event) {
   const { target } = event;
   if (target.classList.contains('cart__item')) {
     target.remove();
-    saveCartItems(cartItems);
+    saveCart();
     const price = Number(target.innerText.split('$')[1]);
     updatePrice('sub', price);
   }
@@ -73,7 +78,7 @@ async function addItemToCartItem(id, callback) {
   const item = await fetchItem(id);
   cartItems.appendChild(createCartItemElement(item));
   if (typeof callback === 'function') {
-    callback(cartItems);
+    callback();
   }
 }
 
@@ -82,12 +87,12 @@ function addItemToCartListener(event) {
   if (target.classList.contains('item__add')) {
     const id = getSkuFromProductItem(target.parentNode);
     // const id = target.parentElement.firstElementChild.innerText;
-    addItemToCartItem(id, saveCartItems);
+    addItemToCartItem(id, saveCart);
   }
 }
 
 async function loadCartItems() {
-  const savedCartItems = await getSavedCartItems();
+  const savedCartItems = JSON.parse(await getSavedCartItems());
   if (savedCartItems != null) {
     savedCartItems.forEach((id) => addItemToCartItem(id));
   }

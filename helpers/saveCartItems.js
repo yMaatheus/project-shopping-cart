@@ -1,8 +1,5 @@
-const saveCartItems = (ol) => {
-  console.log(ol.innerHTML);
-  const cartItemsList = Array
-    .from(document.querySelector('.cart__items').children).map((element) => element.id);
-  localStorage.setItem('cartItems', JSON.stringify(cartItemsList));
+const saveCartItems = (array) => {
+  localStorage.setItem('cartItems', JSON.stringify(array));
 };
 
 if (typeof module !== 'undefined') {
