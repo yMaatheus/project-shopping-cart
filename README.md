@@ -1,5 +1,8 @@
 # Shopping Cart
 
+## 📱 Projeto
+
+Veja o projeto em produção clicando [aqui](https://project-shopping-cart-eta.vercel.app/)
 
 ### 📋 Pré-requisitos
 
